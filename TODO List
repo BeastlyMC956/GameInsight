@@ -1,0 +1,26 @@
+Required Panes:
+* Support (D)
+* Settings (D)
+    * General
+    * Theme
+    * etc
+* My Account (D)
+    * Account Hooks for games
+    * Changing Profile Picture
+* Login (D)
+* Fix Dropdown-Menu
+
+Networking:
+* API Hooks for all games
+* RIOT API permanent key
+* Storing of Data
+
+Technical:
+* Improve code
+* Fix Graphs
+* Locale & Locale Handler?
+* Accessible Data from Files
+* Store Cache Data
+
+Graphical:
+* Improve theme visibility
