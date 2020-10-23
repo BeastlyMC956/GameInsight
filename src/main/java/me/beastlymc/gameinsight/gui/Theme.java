@@ -11,6 +11,7 @@ import java.util.Map;
  *
  * <p>Dynamic theme creation</p>
  * <p>Contains few themes</p>
+ *
  * @author BeastlyMC956
  */
 public enum Theme {
@@ -40,7 +41,7 @@ public enum Theme {
      * <p>More Colors!</p>
      */
     COLORFUL(false,
-            Color.rgb(1,1,1));
+            Color.rgb(1, 1, 1));
 
 
     Map<ThemeBase, Color> themeBaseColorMap;
@@ -57,7 +58,7 @@ public enum Theme {
         // If a theme is not valid, assign the values of the invalid theme with the values of the fallback theme.
         if (colors.length < 3 || colors.length > ThemeBase.values().length) {
             colors = GameInsight.getInstance().getFallbackTheme().colors;
-            if(GameInsight.getInstance().getFallbackTheme().isDarkBase())
+            if (GameInsight.getInstance().getFallbackTheme().isDarkBase())
                 darkBase = true;
         }
 
@@ -73,6 +74,7 @@ public enum Theme {
 
     /**
      * <b>Main Accent Color Method</b>
+     *
      * @return The selected themes main accent color
      */
     public Color getMainAccentColor() {
@@ -81,6 +83,7 @@ public enum Theme {
 
     /**
      * <b>Main Background Color Method</b>
+     *
      * @return The selected themes main background color
      */
     public Color getMainBackgroundColor() {
@@ -89,6 +92,7 @@ public enum Theme {
 
     /**
      * <b>Text Color Method</b>
+     *
      * @return The selected themes text color
      */
     public Color getTextColor() {
@@ -97,6 +101,7 @@ public enum Theme {
 
     /**
      * <b>Sub Accent Color Method</b>
+     *
      * @return Either the sub accent color or the {@link GameInsight#getFallbackTheme()} sub accent color
      */
     public Color getSubAccentColor() {
@@ -107,6 +112,7 @@ public enum Theme {
 
     /**
      * <b>Text Emphasis</b>
+     *
      * @param emphasis The emphasis the text element will be<br>{@link Emphasis#HIGH} 88%<br>{@link Emphasis#MEDIUM} 60%<br>{@link Emphasis#LOW} 38%<br>{@link Emphasis#VERY_LOW} 10%
      * @return The selected emphasis color
      */
@@ -121,6 +127,7 @@ public enum Theme {
 
     /**
      * <b>Background Overlays</b>
+     *
      * @param overlayValues The overlay the background color will be
      * @return The selected overlay color
      */
@@ -147,6 +154,7 @@ public enum Theme {
 
     /**
      * <b>Constructors of a Theme</b>
+     *
      * @author BeastlyMC956
      */
     private enum ThemeBase {
@@ -160,6 +168,7 @@ public enum Theme {
 
     /**
      * <b>Emphasis Enum for Text</b>
+     *
      * @author BeastlyMC956
      */
     public enum Emphasis {
@@ -171,6 +180,7 @@ public enum Theme {
 
     /**
      * <b>Overlay Enum for the Background</b>
+     *
      * @author BeastlyMC956
      */
     public enum OverlayValues {

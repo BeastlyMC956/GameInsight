@@ -21,7 +21,8 @@ public class FontUtilities {
 
     /**
      * <p>Simple loading of a font from {@link Fonts}</p>
-     * @param fonts The font to load
+     *
+     * @param fonts    The font to load
      * @param fontSize The size of the font to use
      * @return The loaded font
      */

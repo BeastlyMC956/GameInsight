@@ -28,6 +28,7 @@ public class GameInsight extends Application {
 
     /**
      * <b>Main start of the application</b>
+     *
      * @param stage The stage to be presented
      * @throws Exception In case {@link GameInsightController} is null
      */
@@ -69,6 +70,7 @@ public class GameInsight extends Application {
 
     /**
      * <b>Sets Application Theme</b>
+     *
      * @param theme The theme you wish to be active
      */
     public static void setTheme(Theme theme) {

@@ -8,13 +8,14 @@ public class FileUtilities {
 
     private static final GameInsightFile
             CACHE_FILE = new CacheFile(RESOURCE_PATH + "cache", "cache.txt"), // Cache File
-            PROFILE_IMAGE_FILE = new ProfileImage(RESOURCE_PATH + "icons","9y2I_Nf9_400x400.jpg"); // Profile Image Picture
+            PROFILE_IMAGE_FILE = new ProfileImage(RESOURCE_PATH + "icons", "9y2I_Nf9_400x400.jpg"); // Profile Image Picture
 
     private static final ImageFile PROFILE_IMAGE = (ImageFile) PROFILE_IMAGE_FILE;
 
     public static GameInsightFile getCache() {
         return CACHE_FILE;
     }
+
     public static GameInsightFile getProfileImageFile() {
         return PROFILE_IMAGE_FILE;
     }

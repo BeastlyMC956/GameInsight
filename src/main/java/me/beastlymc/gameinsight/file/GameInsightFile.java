@@ -111,16 +111,16 @@ public class GameInsightFile {
     }
 
     public Object findDataFromLine(int lineNumber) {
-        if(lineNumber <= 0)
+        if (lineNumber <= 0)
             lineNumber = 1;
         try (Scanner scanner = new Scanner(commonFile)) {
             while (scanner.hasNextLine()) {
                 String s = scanner.nextLine();
-                if(lineNumber != 1) {
+                if (lineNumber != 1) {
                     lineNumber--;
                     continue;
                 }
-                    return s;
+                return s;
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();

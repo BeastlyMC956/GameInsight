@@ -39,6 +39,7 @@ import java.util.Map;
  * <b>Main Pane Controller Class</b>
  *
  * <p>Setup & Logic of the main pane</p>
+ *
  * @author BeastlyMC956
  */
 public class GameInsightController {
@@ -83,6 +84,7 @@ public class GameInsightController {
      * <p>Layout of a lot of elements</p>
      * <p>Dynamic text & image placement</p>
      * <p>Resizing of the profile image</p>
+     *
      * @throws IOException if certain files does not exist
      */
     private void initToolbar() throws IOException {
@@ -144,54 +146,54 @@ public class GameInsightController {
         Image image = SwingFXUtils.toFXImage(newImage, null);
 
         expandedProfileImage.setImage(image);
-        expandedProfileImage.setLayoutX(Math.round(expandedProfilePane.getWidth()/3) - image.getWidth());
+        expandedProfileImage.setLayoutX(Math.round(expandedProfilePane.getWidth() / 3) - image.getWidth());
         expandedProfileImage.setLayoutY(expandedProfileImage.getLayoutX());
 
         accountTypeText.setFont(FontUtilities.loadFont(Fonts.BOLD, 10));
 
-        accountTypePane.setLayoutX(expandedProfileImage.getLayoutX()*2 + image.getWidth());
+        accountTypePane.setLayoutX(expandedProfileImage.getLayoutX() * 2 + image.getWidth());
         accountTypePane.setLayoutY(expandedProfileImage.getLayoutY() + image.getHeight() - 2 - accountTypePane.getHeight());
         accountTypePane.setPrefHeight(16);
         accountTypePane.setBackground(new Background(new BackgroundFill(accountType.getBackground(), CornerRadii.EMPTY, Insets.EMPTY)));
         accountTypeText.setText(accountType.getName().toUpperCase());
-        if(GameInsight.getInstance().getCurrentTheme().isDarkBase())
+        if (GameInsight.getInstance().getCurrentTheme().isDarkBase())
             accountTypeText.setFill(main.getCurrentTheme().getTextColor());
         else
             accountTypeText.setFill(main.getCurrentTheme().getTextColor().invert());
-        accountTypeText.setLayoutY(Math.round(accountTypePane.getHeight()/2 + accountTypeText.getFont().getSize()/2.5));
+        accountTypeText.setLayoutY(Math.round(accountTypePane.getHeight() / 2 + accountTypeText.getFont().getSize() / 2.5));
         accountTypeText.setLayoutX(2);
         accountTypePane.setPrefWidth(accountType.getSize());
 
         expandedProfileText.setFont(text);
         expandedProfileText.setFill(main.getCurrentTheme().getTextColor());
-        expandedProfileText.setLayoutX(expandedProfileImage.getLayoutX()*2 + image.getWidth());
+        expandedProfileText.setLayoutX(expandedProfileImage.getLayoutX() * 2 + image.getWidth());
         expandedProfileText.setLayoutY(expandedProfileImage.getLayoutY() + image.getHeight() - accountTypePane.getHeight() - expandedProfileText.getFont().getSize());
 
         Stop[] stops = new Stop[]{new Stop(0, main.getCurrentTheme().getMainAccentColor()), new Stop(1, main.getCurrentTheme().getSubAccentColor())};
         LinearGradient fill = new LinearGradient(0, 0, 1, 1, true, CycleMethod.NO_CYCLE, stops);
         topCanvas.setLayoutX(expandedProfileImage.getLayoutX());
         topCanvas.setLayoutY(expandedProfileImage.getLayoutY() + image.getHeight() + expandedProfileImage.getLayoutX());
-        topCanvas.setWidth(expandedProfilePane.getWidth() - expandedProfileImage.getLayoutY()*2);
+        topCanvas.setWidth(expandedProfilePane.getWidth() - expandedProfileImage.getLayoutY() * 2);
         topCanvas.setHeight(2);
 
         GraphicsContext topContext = topCanvas.getGraphicsContext2D();
         topContext.setLineWidth(2);
         topContext.beginPath();
-        topContext.moveTo(0,0);
+        topContext.moveTo(0, 0);
         topContext.lineTo(topCanvas.getWidth(), 0);
         GraphicsUtilities.setColors(topContext, fill, fill);
         topContext.closePath();
 
         myAccountPane.setLayoutX(expandedProfileImage.getLayoutX());
-        myAccountPane.setLayoutY(expandedProfileImage.getLayoutY()*3 + image.getHeight() + topCanvas.getHeight());
+        myAccountPane.setLayoutY(expandedProfileImage.getLayoutY() * 3 + image.getHeight() + topCanvas.getHeight());
         myAccountPane.setPrefWidth(topCanvas.getWidth());
         myAccountPane.setCursor(Cursor.HAND);
 
         myAccountText.setFill(main.getCurrentTheme().getTextColor());
         myAccountText.setFont(FontUtilities.loadFont(Fonts.SEMI_BOLD, 13));
         myAccountText.setLayoutX(8);
-        myAccountText.setLayoutY(myAccountPane.getHeight()/2 + Math.floor(myAccountText.getFont().getSize()/2.5));
-        myAccountText.setWrappingWidth(myAccountPane.getWidth() - myAccountText.getLayoutX()*2);
+        myAccountText.setLayoutY(myAccountPane.getHeight() / 2 + Math.floor(myAccountText.getFont().getSize() / 2.5));
+        myAccountText.setWrappingWidth(myAccountPane.getWidth() - myAccountText.getLayoutX() * 2);
 
         settingsPane.setLayoutX(myAccountPane.getLayoutX());
         settingsPane.setLayoutY(myAccountPane.getLayoutY() + expandedProfilePane.getLayoutY());
@@ -201,18 +203,18 @@ public class GameInsightController {
         settingsText.setFill(main.getCurrentTheme().getTextColor());
         settingsText.setFont(FontUtilities.loadFont(Fonts.SEMI_BOLD, 13));
         settingsText.setLayoutX(8);
-        settingsText.setLayoutY(settingsPane.getHeight()/2 + Math.floor(settingsText.getFont().getSize()/2.5));
-        settingsText.setWrappingWidth(myAccountPane.getWidth() - settingsText.getLayoutX()*2);
+        settingsText.setLayoutY(settingsPane.getHeight() / 2 + Math.floor(settingsText.getFont().getSize() / 2.5));
+        settingsText.setWrappingWidth(myAccountPane.getWidth() - settingsText.getLayoutX() * 2);
 
         bottomCanvas.setLayoutX(expandedProfileImage.getLayoutX());
         bottomCanvas.setLayoutY(settingsPane.getLayoutY() + settingsPane.getHeight() + expandedProfileImage.getLayoutY());
-        bottomCanvas.setWidth(expandedProfilePane.getWidth() - expandedProfileImage.getLayoutY()*2);
+        bottomCanvas.setWidth(expandedProfilePane.getWidth() - expandedProfileImage.getLayoutY() * 2);
         bottomCanvas.setHeight(2);
 
         GraphicsContext bottomContext = bottomCanvas.getGraphicsContext2D();
         bottomContext.setLineWidth(2);
         bottomContext.beginPath();
-        bottomContext.moveTo(0,0);
+        bottomContext.moveTo(0, 0);
         bottomContext.lineTo(bottomCanvas.getWidth(), 0);
         GraphicsUtilities.setColors(bottomContext, fill, fill);
         bottomContext.closePath();
@@ -225,8 +227,8 @@ public class GameInsightController {
         logoutText.setFill(main.getCurrentTheme().getTextColor());
         logoutText.setFont(FontUtilities.loadFont(Fonts.SEMI_BOLD, 13));
         logoutText.setLayoutX(8);
-        logoutText.setLayoutY(logoutPane.getHeight()/2 + Math.floor(logoutText.getFont().getSize()/2.5));
-        logoutText.setWrappingWidth(logoutPane.getWidth() - logoutText.getLayoutX()*2);
+        logoutText.setLayoutY(logoutPane.getHeight() / 2 + Math.floor(logoutText.getFont().getSize() / 2.5));
+        logoutText.setWrappingWidth(logoutPane.getWidth() - logoutText.getLayoutX() * 2);
 
         expandedProfileCanvas.setLayoutX(expandedProfileImage.getLayoutX());
         expandedProfileCanvas.setLayoutY(myAccountPane.getLayoutY());
@@ -236,20 +238,20 @@ public class GameInsightController {
         gc.setLineWidth(2);
 
         gc.beginPath();
-        gc.moveTo(0,0);
-        gc.lineTo(0,30);
+        gc.moveTo(0, 0);
+        gc.lineTo(0, 30);
         GraphicsUtilities.setColors(gc, main.getCurrentTheme().getMainAccentColor(), main.getCurrentTheme().getMainAccentColor());
         gc.closePath();
 
         gc.beginPath();
-        gc.moveTo(0,expandedProfileImage.getLayoutY() + 30);
-        gc.lineTo(0,expandedProfileImage.getLayoutY() + 60);
+        gc.moveTo(0, expandedProfileImage.getLayoutY() + 30);
+        gc.lineTo(0, expandedProfileImage.getLayoutY() + 60);
         GraphicsUtilities.setColors(gc, main.getCurrentTheme().getMainAccentColor(), main.getCurrentTheme().getMainAccentColor());
         gc.closePath();
 
         gc.beginPath();
-        gc.moveTo(0,(expandedProfileImage.getLayoutY()*3 + 60) + bottomCanvas.getHeight());
-        gc.lineTo(0,(expandedProfileImage.getLayoutY()*3 + 60) + bottomCanvas.getHeight() + 30);
+        gc.moveTo(0, (expandedProfileImage.getLayoutY() * 3 + 60) + bottomCanvas.getHeight());
+        gc.lineTo(0, (expandedProfileImage.getLayoutY() * 3 + 60) + bottomCanvas.getHeight() + 30);
         GraphicsUtilities.setColors(gc, main.getCurrentTheme().getMainAccentColor().invert(), main.getCurrentTheme().getMainAccentColor().invert());
         gc.closePath();
 
@@ -265,7 +267,8 @@ public class GameInsightController {
     private void initSidebar() {
         initActive();
         sidebarPane.setBackground(new Background(new BackgroundFill(main.getCurrentTheme().getOverlay(Theme.OverlayValues.OVERLAY_2), CornerRadii.EMPTY, Insets.EMPTY)));
-        homePane.setCursor(Cursor.HAND); leaguePane.setCursor(Cursor.HAND);
+        homePane.setCursor(Cursor.HAND);
+        leaguePane.setCursor(Cursor.HAND);
 
         GraphicsContext gcHome = homeCanvas.getGraphicsContext2D();
         GraphicsContext gcLeague = leagueCanvas.getGraphicsContext2D();
@@ -282,28 +285,28 @@ public class GameInsightController {
     }
 
     private void setActive(Pane pane, boolean isActive) {
-        if(!active.isEmpty() && isActive)
-            for(Map.Entry<Pane, Boolean> entry : active.entrySet())
+        if (!active.isEmpty() && isActive)
+            for (Map.Entry<Pane, Boolean> entry : active.entrySet())
                 entry.setValue(false);
 
         active.put(pane, isActive);
         updateBackground(false);
     }
 
-    private void updateBackground(boolean customOverlay){
+    private void updateBackground(boolean customOverlay) {
         boolean drawLine;
-        for(Map.Entry<Pane, Boolean> entry : active.entrySet()) {
+        for (Map.Entry<Pane, Boolean> entry : active.entrySet()) {
             GraphicsContext gc = canvasMap.get(entry.getKey()).getGraphicsContext2D();
             if (entry.getValue().equals(false)) {
-                if(!customOverlay)
+                if (!customOverlay)
                     entry.getKey().setBackground(new Background(new BackgroundFill(main.getCurrentTheme().getOverlay(Theme.OverlayValues.OVERLAY_4), CornerRadii.EMPTY, Insets.EMPTY)));
                 drawLine = false;
             } else {
-                if(!customOverlay)
+                if (!customOverlay)
                     entry.getKey().setBackground(new Background(new BackgroundFill(main.getCurrentTheme().getOverlay(Theme.OverlayValues.OVERLAY_8), CornerRadii.EMPTY, Insets.EMPTY)));
                 drawLine = true;
             }
-            if(drawLine) {
+            if (drawLine) {
                 Stop[] stops = new Stop[]{new Stop(0, main.getCurrentTheme().getMainAccentColor()), new Stop(1, main.getCurrentTheme().getSubAccentColor())};
                 LinearGradient fill = new LinearGradient(0, 0, 1, 1, true, CycleMethod.NO_CYCLE, stops);
 
@@ -384,7 +387,7 @@ public class GameInsightController {
 
     @FXML
     private void onMouseHomeHover() {
-        if(!active.get(homePane)) {
+        if (!active.get(homePane)) {
             setBaseColor(main.getCurrentTheme().getOverlay(Theme.OverlayValues.OVERLAY_6));
             homePane.setBackground(new Background(new BackgroundFill(baseColor, CornerRadii.EMPTY, Insets.EMPTY)));
             updateBackground(true);
@@ -393,7 +396,7 @@ public class GameInsightController {
 
     @FXML
     private void onLeagueHover() {
-        if(active.get(leaguePane).equals(false)) {
+        if (active.get(leaguePane).equals(false)) {
             setBaseColor(main.getCurrentTheme().getOverlay(Theme.OverlayValues.OVERLAY_6));
             leaguePane.setBackground(new Background(new BackgroundFill(baseColor, CornerRadii.EMPTY, Insets.EMPTY)));
             updateBackground(true);
@@ -402,7 +405,7 @@ public class GameInsightController {
 
     @FXML
     private void onMouseHomeExited() {
-        if(!active.get(homePane)) {
+        if (!active.get(homePane)) {
             setBaseColor(main.getCurrentTheme().getOverlay(Theme.OverlayValues.OVERLAY_4));
             homePane.setBackground(new Background(new BackgroundFill(baseColor, CornerRadii.EMPTY, Insets.EMPTY)));
             updateBackground(false);
@@ -411,7 +414,7 @@ public class GameInsightController {
 
     @FXML
     private void onLeagueExited() {
-        if(!active.get(leaguePane)) {
+        if (!active.get(leaguePane)) {
             setBaseColor(main.getCurrentTheme().getOverlay(Theme.OverlayValues.OVERLAY_4));
             leaguePane.setBackground(new Background(new BackgroundFill(baseColor, CornerRadii.EMPTY, Insets.EMPTY)));
             updateBackground(false);
@@ -451,7 +454,7 @@ public class GameInsightController {
             settingsPane,
             logoutPane,
 
-            homePane,
+    homePane,
             leaguePane;
 
     @FXML

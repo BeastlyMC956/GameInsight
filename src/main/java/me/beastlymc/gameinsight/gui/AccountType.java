@@ -3,10 +3,10 @@ package me.beastlymc.gameinsight.gui;
 import javafx.scene.paint.Color;
 
 public enum AccountType {
-    BASIC("Basic", 35, Color.rgb(0,100,150)),
-    SUPPORTER("Supporter", 63, Color.rgb(0,150,100)),
-    PRO("Pro", 25, Color.rgb(175,100,0)),
-    ADMIN("Admin", 39, Color.rgb(170,0,0));
+    BASIC("Basic", 35, Color.rgb(0, 100, 150)),
+    SUPPORTER("Supporter", 63, Color.rgb(0, 150, 100)),
+    PRO("Pro", 25, Color.rgb(175, 100, 0)),
+    ADMIN("Admin", 39, Color.rgb(170, 0, 0));
 
     String name;
     int size;

@@ -25,7 +25,8 @@ public class HTMLUtilities {
      * <b>Sends a request to a website with JSON</b>
      * <p>Gets response from website and writes in json format</p>
      * <p>Writes down the JSON data as a {@link List} for both values & keys </p>
-     * @param location the URL
+     *
+     * @param location  the URL
      * @param jsonArray if the response has an JSON array
      */
     public static void getResponseJSON(String location, boolean jsonArray) {

@@ -10,6 +10,7 @@ import java.io.PrintWriter;
  * <b>Main Networking Class for Games</b>
  *
  * <p>Able to write and Read JSON files from websites</p>
+ *
  * @author BeastlyMC956
  */
 public class GameNetworking {

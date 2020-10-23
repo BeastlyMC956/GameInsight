@@ -22,11 +22,11 @@ import java.nio.file.Paths;
 public class GraphicsUtilities {
 
     /**
-     *
      * <p>Loads an image from any format and converts it to a .png</p>
      * <p>You can specify the name that the new image will have</p>
+     *
      * @param imagePath the origin image
-     * @param newName the new file name in png format
+     * @param newName   the new file name in png format
      * @return a new {@link BufferedImage} instance with the new image loaded
      */
     public static BufferedImage loadImage(String imagePath, String newName) {
@@ -52,7 +52,7 @@ public class GraphicsUtilities {
             Files.delete(path);
 
             return ImageIO.read(newImage);
-        } catch(IOException exception) {
+        } catch (IOException exception) {
             exception.printStackTrace();
         }
         return null;
@@ -60,9 +60,10 @@ public class GraphicsUtilities {
 
     /**
      * <p>Draws a house with custom colors</p>
+     *
      * @param graphicsContext The {@link GraphicsContext} instance
-     * @param fill The fill color
-     * @param stroke The stroke color
+     * @param fill            The fill color
+     * @param stroke          The stroke color
      */
     public static void drawHouse(GraphicsContext graphicsContext, Paint fill, Paint stroke) {
 
@@ -126,19 +127,19 @@ public class GraphicsUtilities {
 
         graphicsContext.beginPath();
 
-        graphicsContext.moveTo(27,24);
-        drawLine(graphicsContext,27,39);
+        graphicsContext.moveTo(27, 24);
+        drawLine(graphicsContext, 27, 39);
         //Bottom Left Diagonal Line
-        drawLine(graphicsContext,24,43);
-        drawLine(graphicsContext,42,43);
+        drawLine(graphicsContext, 24, 43);
+        drawLine(graphicsContext, 42, 43);
         //Bottom Right Diagonal Line
-        drawLine(graphicsContext,45,39);
+        drawLine(graphicsContext, 45, 39);
         //From bottom to top
-        drawLine(graphicsContext,33,39);
-        drawLine(graphicsContext,33,21);
+        drawLine(graphicsContext, 33, 39);
+        drawLine(graphicsContext, 33, 21);
         //Top Diagonal Line
-        drawLine(graphicsContext,24,21);
-        drawLine(graphicsContext,27,24);
+        drawLine(graphicsContext, 24, 21);
+        drawLine(graphicsContext, 27, 24);
 
         graphicsContext.closePath();
         graphicsContext.setFill(fill);
@@ -146,12 +147,12 @@ public class GraphicsUtilities {
         graphicsContext.fill();
         graphicsContext.stroke();
 
-        drawRect(graphicsContext,27,21,30-24,43-21);
-        drawRect(graphicsContext,26,40,18,2);
-        drawRect(graphicsContext,26,22,2,2);
+        drawRect(graphicsContext, 27, 21, 30 - 24, 43 - 21);
+        drawRect(graphicsContext, 26, 40, 18, 2);
+        drawRect(graphicsContext, 26, 22, 2, 2);
     }
 
-    public static void setColors(GraphicsContext graphicsContext, Paint fill, Paint stroke){
+    public static void setColors(GraphicsContext graphicsContext, Paint fill, Paint stroke) {
         graphicsContext.setFill(fill);
         graphicsContext.setStroke(stroke);
 
@@ -162,10 +163,10 @@ public class GraphicsUtilities {
     /**
      * <p>Combing {@link GraphicsContext#lineTo(double, double)} & {@link GraphicsContext#moveTo(double, double)}</p>
      * <p>To make it more understandable from a user perspective</p>
-     * 
+     *
      * @param gc The {@link GraphicsContext} instance
-     * @param x Start X value
-     * @param y Start Y value
+     * @param x  Start X value
+     * @param y  Start Y value
      */
     private static void drawLine(GraphicsContext gc, double x, double y) {
         gc.lineTo(x, y);
@@ -173,14 +174,13 @@ public class GraphicsUtilities {
     }
 
     /**
-     *
      * <p>Simplified version of the already existing {@link GraphicsContext#fillRect(double, double, double, double)}</p>
      * <p>To make it more understandable from a user perspective</p>
      *
-     * @param gc The {@link GraphicsContext} instance
-     * @param x Start X value
-     * @param y Start Y value
-     * @param width How wide the rectangle will be, from left to right
+     * @param gc     The {@link GraphicsContext} instance
+     * @param x      Start X value
+     * @param y      Start Y value
+     * @param width  How wide the rectangle will be, from left to right
      * @param height How high the rectangle will be, from top to bottom
      */
     private static void drawRect(GraphicsContext gc, double x, double y, double width, double height) {

@@ -15,5 +15,6 @@ public class CacheFile extends GameInsightFile {
         System.out.println(this.findData("sad"));
         System.out.println(this.findLineFromData("lol"));
         System.out.println(this.findDataFromLine(4));
+        System.out.println(this.findData("fv"));
     }
 }

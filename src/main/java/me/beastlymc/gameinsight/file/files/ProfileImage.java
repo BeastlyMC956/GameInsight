@@ -19,7 +19,8 @@ public class ProfileImage extends GameInsightFile implements ImageFile {
     }
 
     @Override
-    public void createFile() {}
+    public void createFile() {
+    }
 
     @Override
     public BufferedImage getImage() {
