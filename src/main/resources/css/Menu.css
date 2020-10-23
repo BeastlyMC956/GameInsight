@@ -1,0 +1,39 @@
+#menu, .menuContent {
+	-fx-font-family: 'Poppins-Regular';
+	-fx-font-size: 15;
+}
+#menu {
+    -fx-background-color: rgb(18, 18, 18);
+}
+.menuContent .label {
+	-fx-text-fill: rgba(255, 255, 255);
+}
+.exitButton {
+	-fx-background-color: rgb(204, 80, 102);
+    -fx-padding: 10px 25px 10px 56px;
+    -fx-alignment: center;
+}
+.exitButton:hover {
+    -fx-background-color: rgb(207, 102, 121);
+}
+.supportButton {
+    -fx-background-color: rgb(0, 0, 0);
+    -fx-padding: 10px 25px 10px 44px;
+    -fx-alignment: center;
+}
+ .supportButton:hover {
+	-fx-background-color: rgb(18, 18, 18);
+}
+#menu {
+    -fx-border: none;
+    -fx-label-padding: 3px;
+}
+.context-menu {
+    -fx-background-color: rgb(18, 18, 18);
+    -fx-padding: 0em 0em 0em 0em;
+}
+@font-face {
+	font-family: Poppins-Regular;
+	src: url('../fonts/Poppins-Medium.ttf');
+}
+
