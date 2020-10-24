@@ -7,6 +7,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import me.beastlymc.gameinsight.controller.ExpandedProfileController;
 import me.beastlymc.gameinsight.controller.GameInsightController;
 import me.beastlymc.gameinsight.gui.Theme;
 
@@ -34,25 +35,28 @@ public class GameInsight extends Application {
      */
     public void start(Stage stage) throws Exception {
         GameInsight.stage = stage;
+        ExpandedProfileController expandedProfileController = new ExpandedProfileController();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(GameInsight.class.getResource("/GameInsight.fxml"));
+        FXMLLoader main = new FXMLLoader(GameInsight.class.getResource("/GameInsight.fxml"));
 
-        Pane root = fxmlLoader.load();
+        Pane root = main.load();
 
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(new Scene(root));
         stage.setTitle("Game Insight");
+        stage.setResizable(false);
         stage.getIcons().add(new Image(GameInsight.class.getResource("/icons/applicationLogo.png").toExternalForm()));
 
 
         //private static GameNetworking gameNetworking;
-        GameInsightController insightController = fxmlLoader.getController();
+        GameInsightController insightController = main.getController();
 
         stage.show();
 
         LOGGER.log(Level.INFO, "Successfully initialized the application!");
-
         insightController.initMain();
+
+        ExpandedProfileController.init();
 
         if (!root.isVisible())
             root.setVisible(true);

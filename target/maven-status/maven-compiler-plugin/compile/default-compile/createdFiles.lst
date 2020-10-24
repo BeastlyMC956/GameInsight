@@ -1,10 +1,12 @@
 me\beastlymc\gameinsight\utilities\FontUtilities.class
 me\beastlymc\gameinsight\GameInsight$InstanceHolder.class
 me\beastlymc\gameinsight\file\GameInsightFile.class
+me\beastlymc\gameinsight\controller\ExpandedProfileController.class
 me\beastlymc\gameinsight\networking\GameNetworking.class
 me\beastlymc\gameinsight\gui\AccountType.class
 me\beastlymc\gameinsight\utilities\GraphicsUtilities.class
 me\beastlymc\gameinsight\gui\Theme$Emphasis.class
+me\beastlymc\gameinsight\controller\ControllerUtilities.class
 me\beastlymc\gameinsight\gui\Theme.class
 me\beastlymc\gameinsight\file\files\CacheFile.class
 me\beastlymc\gameinsight\networking\HTMLUtilities.class

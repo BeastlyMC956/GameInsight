@@ -1,5 +1,6 @@
 D:\Programming\GameInsight\src\main\java\me\beastlymc\gameinsight\controller\GameInsightController.java
 D:\Programming\GameInsight\src\main\java\me\beastlymc\gameinsight\file\FileUtilities.java
+D:\Programming\GameInsight\src\main\java\me\beastlymc\gameinsight\controller\ExpandedProfileController.java
 D:\Programming\GameInsight\src\main\java\me\beastlymc\gameinsight\Test.java
 D:\Programming\GameInsight\src\main\java\me\beastlymc\gameinsight\file\files\CacheFile.java
 D:\Programming\GameInsight\src\main\java\me\beastlymc\gameinsight\file\files\ProfileImage.java
@@ -13,3 +14,4 @@ D:\Programming\GameInsight\src\main\java\me\beastlymc\gameinsight\utilities\Font
 D:\Programming\GameInsight\src\main\java\me\beastlymc\gameinsight\networking\HTMLUtilities.java
 D:\Programming\GameInsight\src\main\java\me\beastlymc\gameinsight\networking\GameNetworking.java
 D:\Programming\GameInsight\src\main\java\me\beastlymc\gameinsight\utilities\Fonts.java
+D:\Programming\GameInsight\src\main\java\me\beastlymc\gameinsight\controller\ControllerUtilities.java

@@ -18,13 +18,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.LinearGradient;
 import javafx.scene.paint.Stop;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import me.beastlymc.gameinsight.GameInsight;
 import me.beastlymc.gameinsight.file.FileUtilities;
-import me.beastlymc.gameinsight.gui.AccountType;
 import me.beastlymc.gameinsight.gui.Theme;
 import me.beastlymc.gameinsight.utilities.*;
 
@@ -46,11 +44,7 @@ public class GameInsightController {
 
     //TODO: Create custom dropdown menu with panes?
     private static double xOffset = 0, yOffset = 0;
-    private static boolean isToolbar = true, isEnabled = false;
-    private final Font title = FontUtilities.loadFont(Fonts.BOLD, 20),
-            text = FontUtilities.loadFont(Fonts.SEMI_BOLD, 15),
-            bodyText = FontUtilities.loadFont(Fonts.MEDIUM, 12),
-            mainContent = FontUtilities.loadFont(Fonts.SEMI_BOLD, 25);
+    private static boolean isToolbar = true;
     private Color baseColor;
     private final Map<Pane, Boolean> active = new HashMap<>();
     private final Map<Pane, Canvas> canvasMap = new HashMap<>();
@@ -61,19 +55,16 @@ public class GameInsightController {
         contentPane.setBackground(new Background(new BackgroundFill(main.getCurrentTheme().getOverlay(Theme.OverlayValues.OVERLAY_5), CornerRadii.EMPTY, Insets.EMPTY)));
         homeTitle.setFill(main.getCurrentTheme().getTextColor());
         homeTitle.setWrappingWidth(homeTitle.getText().length() * homeTitle.getFont().getSize() * 1.5);
-        homeTitle.setFont(mainContent);
-        homeTitle.setLayoutY(toolbarPane.getHeight() * 1.5);
-        homeTitle.setLayoutX(sidebarPane.getWidth() * 1.5);
+        homeTitle.setFont(ControllerUtilities.MAIN_CONTENT);
 
         homeText.setLayoutY(homeTitle.getLayoutY() + homeTitle.getFont().getSize() * 1.5);
-        homeText.setLayoutX(homeTitle.getLayoutX());
         homeText.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur id urna augue. " +
                 "Vivamus sit amet mi nec velit lacinia viverra. Etiam nisi nunc, rutrum et nulla vel, cursus tristique justo. " +
                 "Vestibulum commodo felis sapien, ac finibus magna imperdiet eu. In hac habitasse platea dictumst. " +
                 "Nulla facilisi. Nulla feugiat ultricies massa, ac bibendum nisi eleifend id.");
         homeText.setWrappingWidth(contentPane.getWidth() - homeText.getLayoutX() * 2);
         homeText.setFill(main.getCurrentTheme().getEmphasis(Theme.Emphasis.MEDIUM));
-        homeText.setFont(bodyText);
+        homeText.setFont(ControllerUtilities.BODY_TEXT);
 
         initToolbar();
         initSidebar();
@@ -89,13 +80,13 @@ public class GameInsightController {
      */
     private void initToolbar() throws IOException {
         toolbarPane.setBackground(new Background(new BackgroundFill(main.getCurrentTheme().getMainBackgroundColor(), CornerRadii.EMPTY, Insets.EMPTY)));
-        titleText.setFont(title);
+        titleText.setFont(ControllerUtilities.TITLE);
         titleText.setFill(main.getCurrentTheme().getTextColor());
 
         // Flexible Image & Text Placement
 
-        double wrapping = profileName.getText().length() * 7.5 + text.getSize() * (text.getSize() / 8);
-        double spacing = wrapping + dropDownMenuPane.getWidth() + text.getSize() * .2;
+        double wrapping = profileName.getText().length() * 7.5 + ControllerUtilities.TEXT.getSize() * (ControllerUtilities.TEXT.getSize() / 8);
+        double spacing = wrapping + dropDownMenuPane.getWidth() + ControllerUtilities.TEXT.getSize() * .2;
 
         dropDownMenuPane.setLayoutX(main.getStage().getWidth() - (20 + dropDownMenuPane.getWidth()));
 
@@ -110,153 +101,26 @@ public class GameInsightController {
         profileImagePane.setCursor(Cursor.HAND);
 
         profileName.setWrappingWidth(wrapping);
-        profileName.setFont(text);
+        profileName.setFont(ControllerUtilities.TEXT);
         profileName.setFill(main.getCurrentTheme().getTextColor());
         profileName.setLayoutX(main.getStage().getWidth() - spacing);
-        profileName.setLayoutY(profileImagePane.getLayoutY() + (profileImagePane.getHeight() / 2) + text.getSize() / 4);
+        profileName.setLayoutY(profileImagePane.getLayoutY() + (profileImagePane.getHeight() / 2) + ControllerUtilities.TEXT.getSize() / 4);
 
-        profileImagePane.setLayoutX(main.getStage().getWidth() - (spacing + profileImagePane.getWidth() + (text.getSize() * .6)));
+        profileImagePane.setLayoutX(main.getStage().getWidth() - (spacing + profileImagePane.getWidth() + (ControllerUtilities.TEXT.getSize() * .6)));
 
         profileSettings.setFill(main.getCurrentTheme().getMainAccentColor());
         profileSettings.setScaleX(2.3);
         profileSettings.setScaleY(2.3);
 
-        profileSettings.setLayoutY(profileName.getLayoutY() - text.getSize() / 5);
+        profileSettings.setLayoutY(profileName.getLayoutY() - ControllerUtilities.TEXT.getSize() / 5);
         dropDownMenuPane.setLayoutX(main.getStage().getWidth() - (8 + dropDownMenuPane.getWidth()));
 
         dropdownMenuButton.setCursor(Cursor.HAND);
         dropdownMenuButton.setLayoutX(dropDownMenuPane.getLayoutX());
         dropdownMenuButton.setLayoutY(dropDownMenuPane.getLayoutY());
 
-        titleText.setLayoutX(10);
         titleText.setLayoutY(profileName.getLayoutY());
-        initExpandedProfile();
-    }
-
-    private void initExpandedProfile() throws IOException {
-        AccountType accountType = AccountType.PRO;
-        expandedProfilePane.setBackground(new Background(new BackgroundFill(main.getCurrentTheme().getOverlay(Theme.OverlayValues.OVERLAY_7), CornerRadii.EMPTY, Insets.EMPTY)));
-        expandedProfilePane.setLayoutX(profileImagePane.getLayoutX() - expandedProfilePane.getWidth() + profileImagePane.getWidth());
-        expandedProfilePane.setLayoutY(profileImagePane.getLayoutY() + profileImagePane.getHeight());
-
-        BufferedImage icon = FileUtilities.getProfileImage().getImage();
-        double imgHeight = icon.getHeight();
-        double scale = 64 / imgHeight;
-        BufferedImage newImage = Thumbnails.of(icon).scale(scale).asBufferedImage();
-        Image image = SwingFXUtils.toFXImage(newImage, null);
-
-        expandedProfileImage.setImage(image);
-        expandedProfileImage.setLayoutX(Math.round(expandedProfilePane.getWidth() / 3) - image.getWidth());
-        expandedProfileImage.setLayoutY(expandedProfileImage.getLayoutX());
-
-        accountTypeText.setFont(FontUtilities.loadFont(Fonts.BOLD, 10));
-
-        accountTypePane.setLayoutX(expandedProfileImage.getLayoutX() * 2 + image.getWidth());
-        accountTypePane.setLayoutY(expandedProfileImage.getLayoutY() + image.getHeight() - 2 - accountTypePane.getHeight());
-        accountTypePane.setPrefHeight(16);
-        accountTypePane.setBackground(new Background(new BackgroundFill(accountType.getBackground(), CornerRadii.EMPTY, Insets.EMPTY)));
-        accountTypeText.setText(accountType.getName().toUpperCase());
-        if (GameInsight.getInstance().getCurrentTheme().isDarkBase())
-            accountTypeText.setFill(main.getCurrentTheme().getTextColor());
-        else
-            accountTypeText.setFill(main.getCurrentTheme().getTextColor().invert());
-        accountTypeText.setLayoutY(Math.round(accountTypePane.getHeight() / 2 + accountTypeText.getFont().getSize() / 2.5));
-        accountTypeText.setLayoutX(2);
-        accountTypePane.setPrefWidth(accountType.getSize());
-
-        expandedProfileText.setFont(text);
-        expandedProfileText.setFill(main.getCurrentTheme().getTextColor());
-        expandedProfileText.setLayoutX(expandedProfileImage.getLayoutX() * 2 + image.getWidth());
-        expandedProfileText.setLayoutY(expandedProfileImage.getLayoutY() + image.getHeight() - accountTypePane.getHeight() - expandedProfileText.getFont().getSize());
-
-        Stop[] stops = new Stop[]{new Stop(0, main.getCurrentTheme().getMainAccentColor()), new Stop(1, main.getCurrentTheme().getSubAccentColor())};
-        LinearGradient fill = new LinearGradient(0, 0, 1, 1, true, CycleMethod.NO_CYCLE, stops);
-        topCanvas.setLayoutX(expandedProfileImage.getLayoutX());
-        topCanvas.setLayoutY(expandedProfileImage.getLayoutY() + image.getHeight() + expandedProfileImage.getLayoutX());
-        topCanvas.setWidth(expandedProfilePane.getWidth() - expandedProfileImage.getLayoutY() * 2);
-        topCanvas.setHeight(2);
-
-        GraphicsContext topContext = topCanvas.getGraphicsContext2D();
-        topContext.setLineWidth(2);
-        topContext.beginPath();
-        topContext.moveTo(0, 0);
-        topContext.lineTo(topCanvas.getWidth(), 0);
-        GraphicsUtilities.setColors(topContext, fill, fill);
-        topContext.closePath();
-
-        myAccountPane.setLayoutX(expandedProfileImage.getLayoutX());
-        myAccountPane.setLayoutY(expandedProfileImage.getLayoutY() * 3 + image.getHeight() + topCanvas.getHeight());
-        myAccountPane.setPrefWidth(topCanvas.getWidth());
-        myAccountPane.setCursor(Cursor.HAND);
-
-        myAccountText.setFill(main.getCurrentTheme().getTextColor());
-        myAccountText.setFont(FontUtilities.loadFont(Fonts.SEMI_BOLD, 13));
-        myAccountText.setLayoutX(8);
-        myAccountText.setLayoutY(myAccountPane.getHeight() / 2 + Math.floor(myAccountText.getFont().getSize() / 2.5));
-        myAccountText.setWrappingWidth(myAccountPane.getWidth() - myAccountText.getLayoutX() * 2);
-
-        settingsPane.setLayoutX(myAccountPane.getLayoutX());
-        settingsPane.setLayoutY(myAccountPane.getLayoutY() + expandedProfilePane.getLayoutY());
-        settingsPane.setPrefWidth(topCanvas.getWidth());
-        settingsPane.setCursor(Cursor.HAND);
-
-        settingsText.setFill(main.getCurrentTheme().getTextColor());
-        settingsText.setFont(FontUtilities.loadFont(Fonts.SEMI_BOLD, 13));
-        settingsText.setLayoutX(8);
-        settingsText.setLayoutY(settingsPane.getHeight() / 2 + Math.floor(settingsText.getFont().getSize() / 2.5));
-        settingsText.setWrappingWidth(myAccountPane.getWidth() - settingsText.getLayoutX() * 2);
-
-        bottomCanvas.setLayoutX(expandedProfileImage.getLayoutX());
-        bottomCanvas.setLayoutY(settingsPane.getLayoutY() + settingsPane.getHeight() + expandedProfileImage.getLayoutY());
-        bottomCanvas.setWidth(expandedProfilePane.getWidth() - expandedProfileImage.getLayoutY() * 2);
-        bottomCanvas.setHeight(2);
-
-        GraphicsContext bottomContext = bottomCanvas.getGraphicsContext2D();
-        bottomContext.setLineWidth(2);
-        bottomContext.beginPath();
-        bottomContext.moveTo(0, 0);
-        bottomContext.lineTo(bottomCanvas.getWidth(), 0);
-        GraphicsUtilities.setColors(bottomContext, fill, fill);
-        bottomContext.closePath();
-
-        logoutPane.setLayoutX(expandedProfileImage.getLayoutX());
-        logoutPane.setLayoutY(bottomCanvas.getLayoutY() + bottomCanvas.getHeight() + expandedProfileImage.getLayoutY());
-        logoutPane.setPrefWidth(bottomCanvas.getWidth());
-        logoutPane.setCursor(Cursor.HAND);
-
-        logoutText.setFill(main.getCurrentTheme().getTextColor());
-        logoutText.setFont(FontUtilities.loadFont(Fonts.SEMI_BOLD, 13));
-        logoutText.setLayoutX(8);
-        logoutText.setLayoutY(logoutPane.getHeight() / 2 + Math.floor(logoutText.getFont().getSize() / 2.5));
-        logoutText.setWrappingWidth(logoutPane.getWidth() - logoutText.getLayoutX() * 2);
-
-        expandedProfileCanvas.setLayoutX(expandedProfileImage.getLayoutX());
-        expandedProfileCanvas.setLayoutY(myAccountPane.getLayoutY());
-        expandedProfileCanvas.setWidth(2);
-        GraphicsContext gc = expandedProfileCanvas.getGraphicsContext2D();
-
-        gc.setLineWidth(2);
-
-        gc.beginPath();
-        gc.moveTo(0, 0);
-        gc.lineTo(0, 30);
-        GraphicsUtilities.setColors(gc, main.getCurrentTheme().getMainAccentColor(), main.getCurrentTheme().getMainAccentColor());
-        gc.closePath();
-
-        gc.beginPath();
-        gc.moveTo(0, expandedProfileImage.getLayoutY() + 30);
-        gc.lineTo(0, expandedProfileImage.getLayoutY() + 60);
-        GraphicsUtilities.setColors(gc, main.getCurrentTheme().getMainAccentColor(), main.getCurrentTheme().getMainAccentColor());
-        gc.closePath();
-
-        gc.beginPath();
-        gc.moveTo(0, (expandedProfileImage.getLayoutY() * 3 + 60) + bottomCanvas.getHeight());
-        gc.lineTo(0, (expandedProfileImage.getLayoutY() * 3 + 60) + bottomCanvas.getHeight() + 30);
-        GraphicsUtilities.setColors(gc, main.getCurrentTheme().getMainAccentColor().invert(), main.getCurrentTheme().getMainAccentColor().invert());
-        gc.closePath();
-
-        expandedProfilePane.setPrefHeight(logoutPane.getLayoutY() + logoutPane.getHeight() + expandedProfileImage.getLayoutY());
-
+        //  initExpandedProfile();
     }
 
     /**
@@ -338,9 +202,19 @@ public class GameInsightController {
     }
 
     @FXML
+    void onMainMouseClicked() {
+        Stage stage = ExpandedProfileController.getStage();
+        if (!stage.isFocused())
+            stage.close();
+    }
+
+    @FXML
     private void onToolbarPress(MouseEvent event) {
         if (isToolbar) {
             Stage stage = main.getStage();
+            Stage profile = ExpandedProfileController.getStage();
+            if (profile.isShowing())
+                profile.close();
 
             xOffset = stage.getX() - event.getScreenX();
             yOffset = stage.getY() - event.getScreenY();
@@ -351,16 +225,13 @@ public class GameInsightController {
     private void onToolbarDrag(MouseEvent event) {
         if (isToolbar) {
             Stage stage = main.getStage();
+            Stage profile = ExpandedProfileController.getStage();
+            if (profile.isShowing())
+                profile.close();
 
             stage.setX(event.getScreenX() + xOffset);
             stage.setY(event.getScreenY() + yOffset);
         }
-    }
-
-    @FXML
-    private void onLogoutClick() {
-        Stage stage = main.getStage();
-        stage.close();
     }
 
     @FXML
@@ -376,13 +247,22 @@ public class GameInsightController {
     @FXML
     private void onExitAction() {
         Stage stage = main.getStage();
+        Stage profileStage = ExpandedProfileController.getStage();
+        profileStage.close();
         stage.close();
     }
 
     @FXML
     private void onProfileImageClicked() {
-        expandedProfilePane.setVisible(!isEnabled);
-        isEnabled = !isEnabled;
+        boolean toggle = ExpandedProfileController.getStage().isShowing();
+
+
+        if (!toggle) {
+            ExpandedProfileController.getStage().show();
+            ExpandedProfileController.getProfilePane().setVisible(true);
+            ExpandedProfileController.getInstance().update();
+        } else
+            ExpandedProfileController.getStage().close();
     }
 
     @FXML
@@ -448,13 +328,7 @@ public class GameInsightController {
             sidebarPane,
             profileImagePane,
             dropDownMenuPane,
-            expandedProfilePane,
-            accountTypePane,
-            myAccountPane,
-            settingsPane,
-            logoutPane,
-
-    homePane,
+            homePane,
             leaguePane;
 
     @FXML
@@ -462,24 +336,15 @@ public class GameInsightController {
             profileSettings,
             titleText,
             homeTitle,
-            homeText,
-            expandedProfileText,
-            accountTypeText,
-            myAccountText,
-            settingsText,
-            logoutText;
+            homeText;
 
     @FXML
     private MenuButton dropdownMenuButton;
 
     @FXML
-    private ImageView profileImage,
-            expandedProfileImage;
+    private ImageView profileImage;
 
     @FXML
     private Canvas homeCanvas,
-            leagueCanvas,
-            expandedProfileCanvas,
-            topCanvas,
-            bottomCanvas;
+            leagueCanvas;
 }

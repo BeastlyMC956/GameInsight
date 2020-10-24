@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="800.0" minWidth="1300.0" prefHeight="800.0" prefWidth="1300" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.beastlymc.gameinsight.controller.GameInsightController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="800.0" minWidth="1300.0" onMouseClicked="#onMainMouseClicked" prefHeight="800.0" prefWidth="1300" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.beastlymc.gameinsight.controller.GameInsightController">
    <Pane fx:id="sidebarPane" layoutY="64.0" prefHeight="736.0" prefWidth="68.0">
       <Pane fx:id="homePane" onMouseClicked="#onHomeClicked" onMouseEntered="#onMouseHomeHover" onMouseExited="#onMouseHomeExited" prefHeight="64.0" prefWidth="68.0">
          <Canvas fx:id="homeCanvas" height="64.0" width="68.0" />
@@ -50,41 +50,12 @@
             </MenuItem>
          </items>
       </MenuButton>
-      <Text fx:id="titleText" strokeType="OUTSIDE" strokeWidth="0.0" text="Game Insight" />
+      <Text fx:id="titleText" layoutX="10.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Game Insight" />
    </Pane>
    <Pane fx:id="contentPane" layoutX="68.0" layoutY="64.0" prefHeight="736.0" prefWidth="1232.0">
       <Pane fx:id="mainMenuPane" prefHeight="736.0" prefWidth="1232.0">
-         <Text fx:id="homeTitle" layoutX="131.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dashboard" wrappingWidth="57.83203125" />
-         <Text fx:id="homeText" layoutX="131.0" layoutY="210.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filler Content" wrappingWidth="70.763671875" />
+         <Text fx:id="homeTitle" layoutX="102.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dashboard" wrappingWidth="57.83203125" />
+         <Text fx:id="homeText" layoutX="102.0" layoutY="210.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filler Content" wrappingWidth="70.763671875" />
       </Pane>
-   </Pane>
-   <Pane fx:id="expandedProfilePane" prefHeight="350.0" prefWidth="250.0" visible="false">
-      <children>
-         <ImageView fx:id="expandedProfileImage" fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true" />
-         <Text fx:id="expandedProfileText" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="BeastlyMC956" />
-         <Pane fx:id="accountTypePane">
-            <children>
-               <Text fx:id="accountTypeText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-            </children>
-         </Pane>
-         <Canvas fx:id="topCanvas" height="200.0" width="200.0" />
-         <Pane fx:id="myAccountPane" layoutY="30.0" prefHeight="30.0" prefWidth="0.0">
-            <children>
-               <Text fx:id="myAccountText" strokeType="OUTSIDE" strokeWidth="0.0" text="My Account" />
-            </children>
-         </Pane>
-         <Pane fx:id="settingsPane" prefHeight="30.0" prefWidth="0.0">
-            <children>
-               <Text fx:id="settingsText" strokeType="OUTSIDE" strokeWidth="0.0" text="Settings" />
-            </children>
-         </Pane>
-         <Canvas fx:id="bottomCanvas" height="200.0" width="200.0" />
-         <Pane fx:id="logoutPane" onMouseClicked="#onLogoutClick" prefHeight="30.0" prefWidth="0.0">
-            <children>
-               <Text fx:id="logoutText" strokeType="OUTSIDE" strokeWidth="0.0" text="Log Out" />
-            </children>
-         </Pane>
-         <Canvas fx:id="expandedProfileCanvas" height="200.0" width="200.0" />
-      </children>
    </Pane>
 </Pane>
