@@ -1,6 +1,7 @@
 package me.beastlymc.gameinsight.controller;
 
 import javafx.embed.swing.SwingFXUtils;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
@@ -118,9 +119,12 @@ public class GameInsightController {
         dropdownMenuButton.setCursor(Cursor.HAND);
         dropdownMenuButton.setLayoutX(dropDownMenuPane.getLayoutX());
         dropdownMenuButton.setLayoutY(dropDownMenuPane.getLayoutY());
+        dropdownMenuButton.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
+            Stage stage = ExpandedProfileController.getStage();
+            stage.close();
+        });
 
         titleText.setLayoutY(profileName.getLayoutY());
-        //  initExpandedProfile();
     }
 
     /**
@@ -255,8 +259,6 @@ public class GameInsightController {
     @FXML
     private void onProfileImageClicked() {
         boolean toggle = ExpandedProfileController.getStage().isShowing();
-
-
         if (!toggle) {
             ExpandedProfileController.getStage().show();
             ExpandedProfileController.getProfilePane().setVisible(true);

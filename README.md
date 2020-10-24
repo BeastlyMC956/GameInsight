@@ -17,6 +17,7 @@ Coded with the help of JavaFX
     * Account Hooks for games
     * Changing Profile Picture
 - [ ] Login (Seperate)
+- [x] Fix Profile-Menu
 - [ ] Fix Dropdown-Menu
 
 #### Networking:

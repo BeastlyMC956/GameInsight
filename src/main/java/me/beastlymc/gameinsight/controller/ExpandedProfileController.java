@@ -74,10 +74,10 @@ public class ExpandedProfileController {
         }
     }
 
-    private static void updatePosition() {
+    private void updatePosition() {
         double stageWidth = WIDTH - GameInsight.getInstance().getStage().getWidth() + GameInsight.getInstance().getStage().getX() + stage.getWidth() + 18,
                 stageHeight = HEIGHT / 2 - GameInsight.getInstance().getStage().getHeight() / 2 + GameInsight.getInstance().getStage().getY() - GameInsight.getInstance().getStage().getHeight() * 0.115; // 92
-        stage.setX(Math.round(stageWidth)); //Should be dynamic
+        stage.setX(Math.round(stageWidth));
         stage.setY(Math.round(stageHeight));
     }
 
