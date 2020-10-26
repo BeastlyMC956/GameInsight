@@ -1,7 +1,12 @@
 package me.beastlymc.gameinsight.file;
 
+import me.beastlymc.gameinsight.GameInsight;
+
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import java.util.logging.Level;
 
 /**
  * <b>A Custom File Creation Class</b>
@@ -59,21 +64,21 @@ public class GameInsightFile {
         }
     }
 
-    public void writeToFile(String index, boolean unique) {
+    public void writeToFile(Object element, boolean unique) {
         if (unique) {
             if (commonFile.length() > 0)
-                recreateFile();
+                recreateFile(false);
             try (BufferedReader in = new BufferedReader(new FileReader(commonFile))) {
                 for (String line; (line = in.readLine()) != null; )
-                    if (line.equals(index))
+                    if (line.equals(element))
                         return;
             } catch (Exception e) {
                 throw new RuntimeException("Error reading file: " + commonFile, e);
             }
         } else
-            recreateFile();
+            recreateFile(false);
         try (FileWriter out = new FileWriter(commonFile, true)) {
-            out.write(index);
+            out.write(String.valueOf(element));
             out.write(System.lineSeparator());
             out.flush();
         } catch (Exception e) {
@@ -81,33 +86,42 @@ public class GameInsightFile {
         }
     }
 
-    //TODO: Make this work
-    public void writeInline(int line, String index) {
-        try (FileWriter out = new FileWriter(commonFile, true)) {
-            int lineNumber = 0;
 
-            try (Scanner scanner = new Scanner(commonFile)) {
-                while (scanner.hasNextLine()) {
-                    lineNumber++;
-                    if (lineNumber == line - 1) {
-                        out.write(System.lineSeparator());
-                        out.write(index);
-                        out.write(System.lineSeparator());
-                    }
-                    else if(line > lineNumber) {
-                        for (int i = 0; i < line; i++)
-                            out.write(System.lineSeparator());
-                        out.write(index);
-                        out.write(System.lineSeparator());
-                        System.out.println("extra lines added");
-                    }
-                    scanner.nextLine();
-                }
-                out.flush();
-                out.close();
+    /**
+     * <b>Write Text to a Line</b>
+     * <p>Writes a specific String in to a specific line</p>
+     *
+     * @param line What line to insert the element
+     * @param element What text should be written
+     */
+    public void writeInline(int line, Object element) {
+        if(line < 1) {
+            GameInsight.getLOGGER().logp(Level.WARNING,"GameInsightFile.java","#writeInline(int line, Object element)","Line can not be less than 1");
+            return;
+        }
+        try {
+            List<Object> allLines = new ArrayList<>();
+
+            Scanner scanner = new Scanner(commonFile);
+            while(scanner.hasNextLine())
+                allLines.add(scanner.nextLine());
+            scanner.close();
+
+            if(line > allLines.size())
+                for (int i = allLines.size()+1; i < line; i++)
+                    allLines.add("");
+            allLines.add(line - 1, element);
+
+            recreateFile(true);
+
+            FileWriter out = new FileWriter(commonFile, true);
+            for (Object s : allLines) {
+                out.write(String.valueOf(s));
+                out.write(System.lineSeparator());
             }
-        } catch(IOException exception){
-            exception.printStackTrace();
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -161,9 +175,16 @@ public class GameInsightFile {
     }
     /*------------------------[ End of Constructor ]------------------------*/
 
-    private void recreateFile() {
+    private void recreateFile(boolean skipCheck) {
+        if (skipCheck)
+            if (commonFile.delete()) {
+                System.out.println("recreated before");
+                createFile();
+                return;
+            }
         if (element == 0)
             if (commonFile.delete()) {
+                System.out.println("recreated after");
                 createFile();
                 element++;
             }
