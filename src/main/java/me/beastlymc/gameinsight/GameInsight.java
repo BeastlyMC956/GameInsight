@@ -53,7 +53,7 @@ public class GameInsight extends Application {
 
         stage.show();
 
-        getLOGGER().logp(Level.INFO, "GameInsight.java","#start(Stage stage);","Successfully initialized the application!");
+        getLOGGER().logp(Level.INFO, "GameInsight.java", "#start(Stage stage);", "Successfully initialized the application!");
         insightController.initMain();
 
         ExpandedProfileController.init();
@@ -67,7 +67,7 @@ public class GameInsight extends Application {
 
         setTheme(Theme.DARK);
 
-        getLOGGER().logp(Level.INFO, "GameInsight.java","#main(String[] args]);","Successfully initialized all utilities!");
+        getLOGGER().logp(Level.INFO, "GameInsight.java", "#main(String[] args]);", "Successfully initialized all utilities!");
 
         launch(args);
     }

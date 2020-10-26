@@ -91,24 +91,24 @@ public class GameInsightFile {
      * <b>Write Text to a Line</b>
      * <p>Writes a specific String in to a specific line</p>
      *
-     * @param line What line to insert the element
+     * @param line    What line to insert the element
      * @param element What text should be written
      */
     public void writeInline(int line, Object element) {
-        if(line < 1) {
-            GameInsight.getLOGGER().logp(Level.WARNING,"GameInsightFile.java","#writeInline(int line, Object element)","Line can not be less than 1");
+        if (line < 1) {
+            GameInsight.getLOGGER().logp(Level.WARNING, "GameInsightFile.java", "#writeInline(int line, Object element)", "Line can not be less than 1");
             return;
         }
         try {
             List<Object> allLines = new ArrayList<>();
 
             Scanner scanner = new Scanner(commonFile);
-            while(scanner.hasNextLine())
+            while (scanner.hasNextLine())
                 allLines.add(scanner.nextLine());
             scanner.close();
 
-            if(line > allLines.size())
-                for (int i = allLines.size()+1; i < line; i++)
+            if (line > allLines.size())
+                for (int i = allLines.size() + 1; i < line; i++)
                     allLines.add("");
             allLines.add(line - 1, element);
 
