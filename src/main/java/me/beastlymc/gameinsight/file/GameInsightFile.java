@@ -75,8 +75,39 @@ public class GameInsightFile {
         try (FileWriter out = new FileWriter(commonFile, true)) {
             out.write(index);
             out.write(System.lineSeparator());
+            out.flush();
         } catch (Exception e) {
             throw new RuntimeException("Error appending to file: " + commonFile, e);
+        }
+    }
+
+    //TODO: Make this work
+    public void writeInline(int line, String index) {
+        try (FileWriter out = new FileWriter(commonFile, true)) {
+            int lineNumber = 0;
+
+            try (Scanner scanner = new Scanner(commonFile)) {
+                while (scanner.hasNextLine()) {
+                    lineNumber++;
+                    if (lineNumber == line - 1) {
+                        out.write(System.lineSeparator());
+                        out.write(index);
+                        out.write(System.lineSeparator());
+                    }
+                    else if(line > lineNumber) {
+                        for (int i = 0; i < line; i++)
+                            out.write(System.lineSeparator());
+                        out.write(index);
+                        out.write(System.lineSeparator());
+                        System.out.println("extra lines added");
+                    }
+                    scanner.nextLine();
+                }
+                out.flush();
+                out.close();
+            }
+        } catch(IOException exception){
+            exception.printStackTrace();
         }
     }
 

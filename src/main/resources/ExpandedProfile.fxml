@@ -5,32 +5,24 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Text?>
 
-<Pane fx:id="expandedProfilePane" prefHeight="350.0" prefWidth="250.0" visible="false" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.beastlymc.gameinsight.controller.ExpandedProfileController">
-   <children>
-      <ImageView fx:id="expandedProfileImage" fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true" />
-      <Text fx:id="expandedProfileText" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="BeastlyMC956" />
-      <Pane fx:id="accountTypePane" prefHeight="16.0">
-         <children>
-            <Text fx:id="accountTypeText" layoutX="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-         </children>
-      </Pane>
-      <Canvas fx:id="topCanvas" height="2.0" width="200.0" />
-      <Pane fx:id="myAccountPane" layoutY="30.0" prefHeight="30.0" prefWidth="0.0">
-         <children>
-            <Text fx:id="myAccountText" layoutX="8.0" strokeType="OUTSIDE" strokeWidth="0.0" text="My Account" />
-         </children>
-      </Pane>
-      <Pane fx:id="settingsPane" prefHeight="30.0" prefWidth="0.0">
-         <children>
-            <Text fx:id="settingsText" layoutX="8.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Settings" />
-         </children>
-      </Pane>
-      <Canvas fx:id="bottomCanvas" height="2.0" width="200.0" />
-      <Pane fx:id="logoutPane" onMouseClicked="#onLogoutClick" prefHeight="30.0" prefWidth="0.0">
-         <children>
-            <Text fx:id="logoutText" layoutX="8.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Log Out" />
-         </children>
-      </Pane>
-      <Canvas fx:id="expandedProfileCanvas" height="200.0" width="2.0" />
-   </children>
+<Pane fx:id="expandedProfilePane" prefHeight="350.0" prefWidth="250.0" visible="false"
+      xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="me.beastlymc.gameinsight.controller.ExpandedProfileController">
+   <ImageView fx:id="expandedProfileImage" fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true"/>
+   <Text fx:id="expandedProfileText" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="BeastlyMC956"/>
+   <Pane fx:id="accountTypePane" prefHeight="16.0">
+      <Text fx:id="accountTypeText" layoutX="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text"/>
+   </Pane>
+   <Canvas fx:id="topCanvas" height="2.0" width="200.0"/>
+   <Pane fx:id="myAccountPane" layoutY="30.0" prefHeight="30.0" prefWidth="0.0">
+      <Text fx:id="myAccountText" layoutX="8.0" strokeType="OUTSIDE" strokeWidth="0.0" text="My Account"/>
+   </Pane>
+   <Pane fx:id="settingsPane" prefHeight="30.0" prefWidth="0.0">
+      <Text fx:id="settingsText" layoutX="8.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Settings"/>
+   </Pane>
+   <Canvas fx:id="bottomCanvas" height="2.0" width="200.0"/>
+   <Pane fx:id="logoutPane" onMouseClicked="#onLogoutClick" prefHeight="30.0" prefWidth="0.0">
+      <Text fx:id="logoutText" layoutX="8.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Log Out"/>
+   </Pane>
+   <Canvas fx:id="expandedProfileCanvas" height="200.0" width="2.0"/>
 </Pane>

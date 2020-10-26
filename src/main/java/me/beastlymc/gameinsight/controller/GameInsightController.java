@@ -1,7 +1,6 @@
 package me.beastlymc.gameinsight.controller;
 
 import javafx.embed.swing.SwingFXUtils;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;

@@ -61,7 +61,6 @@ public class ExpandedProfileController {
         stage.setHeight(height);
 
         stage.setResizable(false);
-
         stage.getIcons().add(new Image(GameInsight.class.getResource("/icons/applicationLogo.png").toExternalForm()));
     }
 
@@ -99,7 +98,6 @@ public class ExpandedProfileController {
 
         accountTypePane.setLayoutX(expandedProfileImage.getLayoutX() * 2 + image.getWidth());
         accountTypePane.setLayoutY(expandedProfileImage.getLayoutY() + image.getHeight() - accountTypePane.getHeight());
-        accountTypePane.setPrefHeight(16);
         accountTypePane.setBackground(new Background(new BackgroundFill(accountType.getBackground(), CornerRadii.EMPTY, Insets.EMPTY)));
         accountTypeText.setText(accountType.getName().toUpperCase());
         if (GameInsight.getInstance().getCurrentTheme().isDarkBase())
@@ -107,7 +105,6 @@ public class ExpandedProfileController {
         else
             accountTypeText.setFill(main.getCurrentTheme().getTextColor().invert());
         accountTypeText.setLayoutY(Math.round(accountTypePane.getHeight() / 2 + accountTypeText.getFont().getSize() / 2.5));
-        accountTypeText.setLayoutX(2);
         accountTypePane.setPrefWidth(accountType.getSize());
 
         expandedProfileText.setFont(ControllerUtilities.TEXT);
@@ -118,7 +115,6 @@ public class ExpandedProfileController {
         topCanvas.setLayoutX(expandedProfileImage.getLayoutX());
         topCanvas.setLayoutY(expandedProfileImage.getLayoutY() + image.getHeight() + expandedProfileImage.getLayoutX());
         topCanvas.setWidth(expandedProfilePane.getWidth() - expandedProfileImage.getLayoutY() * 2);
-        topCanvas.setHeight(2);
 
         myAccountPane.setLayoutX(expandedProfileImage.getLayoutX());
         myAccountPane.setLayoutY(expandedProfileImage.getLayoutY() * 3 + image.getHeight() + topCanvas.getHeight() - 1);
@@ -132,7 +128,6 @@ public class ExpandedProfileController {
 
         expandedProfileCanvas.setLayoutX(expandedProfileImage.getLayoutX());
         expandedProfileCanvas.setLayoutY(myAccountPane.getLayoutY());
-        expandedProfileCanvas.setWidth(2);
 
         settingsPane.setLayoutX(myAccountPane.getLayoutX());
         settingsPane.setLayoutY(myAccountPane.getLayoutY() + myAccountPane.getHeight() + expandedProfileImage.getLayoutY() + 2);
@@ -147,7 +142,6 @@ public class ExpandedProfileController {
         bottomCanvas.setLayoutX(expandedProfileImage.getLayoutX());
         bottomCanvas.setLayoutY(settingsPane.getLayoutY() + settingsPane.getHeight() + expandedProfileImage.getLayoutY() + 1);
         bottomCanvas.setWidth(expandedProfilePane.getWidth() - expandedProfileImage.getLayoutY() * 2);
-        bottomCanvas.setHeight(2);
 
         logoutPane.setLayoutX(expandedProfileImage.getLayoutX());
         logoutPane.setLayoutY(bottomCanvas.getLayoutY() + bottomCanvas.getHeight() + expandedProfileImage.getLayoutY());
@@ -211,7 +205,7 @@ public class ExpandedProfileController {
     }
 
     @FXML
-    void onLogoutClick() {
+    private void onLogoutClick() {
         Stage mainStage = main.getStage();
         mainStage.close();
         stage.close();

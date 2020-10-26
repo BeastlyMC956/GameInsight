@@ -12,9 +12,9 @@ public class CacheFile extends GameInsightFile {
         this.writeToFile("lol", true);
         this.writeToFile("abc", false);
 
-        System.out.println(this.findData("sad"));
-        System.out.println(this.findLineFromData("lol"));
-        System.out.println(this.findDataFromLine(4));
-        System.out.println(this.findData("fv"));
+//        System.out.println(this.findData("sad"));
+//        System.out.println(this.findLineFromData("lol"));
+//        System.out.println(this.findDataFromLine(4));
+//        System.out.println(this.findData("fv"));
     }
 }
