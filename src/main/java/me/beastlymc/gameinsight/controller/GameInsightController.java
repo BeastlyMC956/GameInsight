@@ -51,9 +51,9 @@ public class GameInsightController {
     private final GameInsight main = GameInsight.getInstance();
 
     public void initMain() throws IOException {
-        setBaseColor(main.getCurrentTheme().getOverlay(Theme.OverlayValues.OVERLAY_4));
-        contentPane.setBackground(new Background(new BackgroundFill(main.getCurrentTheme().getOverlay(Theme.OverlayValues.OVERLAY_5), CornerRadii.EMPTY, Insets.EMPTY)));
-        homeTitle.setFill(main.getCurrentTheme().getTextColor());
+        setBaseColor(main.getCurrentTheme().addOverlay(50));
+        contentPane.setBackground(new Background(new BackgroundFill(main.getCurrentTheme().addOverlay(22), CornerRadii.EMPTY, Insets.EMPTY)));
+        homeTitle.setFill(main.getCurrentTheme().getThemeBaseColorMap().get(Theme.ThemeBase.TEXT_COLOR));
         homeTitle.setWrappingWidth(homeTitle.getText().length() * homeTitle.getFont().getSize() * 1.5);
         homeTitle.setFont(ControllerUtilities.MAIN_CONTENT);
 
@@ -63,7 +63,7 @@ public class GameInsightController {
                 "Vestibulum commodo felis sapien, ac finibus magna imperdiet eu. In hac habitasse platea dictumst. " +
                 "Nulla facilisi. Nulla feugiat ultricies massa, ac bibendum nisi eleifend id.");
         homeText.setWrappingWidth(contentPane.getWidth() - homeText.getLayoutX() * 2);
-        homeText.setFill(main.getCurrentTheme().getEmphasis(Theme.Emphasis.MEDIUM));
+        homeText.setFill(main.getCurrentTheme().getEmphasis(60));
         homeText.setFont(ControllerUtilities.BODY_TEXT);
 
         initToolbar();
@@ -79,9 +79,9 @@ public class GameInsightController {
      * @throws IOException if certain files does not exist
      */
     private void initToolbar() throws IOException {
-        toolbarPane.setBackground(new Background(new BackgroundFill(main.getCurrentTheme().getMainBackgroundColor(), CornerRadii.EMPTY, Insets.EMPTY)));
+        toolbarPane.setBackground(new Background(new BackgroundFill(main.getCurrentTheme().getEmphasis(4), CornerRadii.EMPTY, Insets.EMPTY)));
         titleText.setFont(ControllerUtilities.TITLE);
-        titleText.setFill(main.getCurrentTheme().getTextColor());
+        titleText.setFill(main.getCurrentTheme().getThemeBaseColorMap().get(Theme.ThemeBase.TEXT_COLOR));
 
         // Flexible Image & Text Placement
 
@@ -102,13 +102,13 @@ public class GameInsightController {
 
         profileName.setWrappingWidth(wrapping);
         profileName.setFont(ControllerUtilities.TEXT);
-        profileName.setFill(main.getCurrentTheme().getTextColor());
+        profileName.setFill(main.getCurrentTheme().getThemeBaseColorMap().get(Theme.ThemeBase.TEXT_COLOR));
         profileName.setLayoutX(main.getStage().getWidth() - spacing);
         profileName.setLayoutY(profileImagePane.getLayoutY() + (profileImagePane.getHeight() / 2) + ControllerUtilities.TEXT.getSize() / 4);
 
         profileImagePane.setLayoutX(main.getStage().getWidth() - (spacing + profileImagePane.getWidth() + (ControllerUtilities.TEXT.getSize() * .6)));
 
-        profileSettings.setFill(main.getCurrentTheme().getMainAccentColor());
+        profileSettings.setFill(main.getCurrentTheme().getThemeBaseColorMap().get(Theme.ThemeBase.PRIMARY_ACCENT_COLOR));
         profileSettings.setScaleX(2.3);
         profileSettings.setScaleY(2.3);
 
@@ -133,15 +133,15 @@ public class GameInsightController {
      */
     private void initSidebar() {
         initActive();
-        sidebarPane.setBackground(new Background(new BackgroundFill(main.getCurrentTheme().getOverlay(Theme.OverlayValues.OVERLAY_2), CornerRadii.EMPTY, Insets.EMPTY)));
+        sidebarPane.setBackground(new Background(new BackgroundFill(main.getCurrentTheme().getEmphasis(6), CornerRadii.EMPTY, Insets.EMPTY)));
         homePane.setCursor(Cursor.HAND);
         leaguePane.setCursor(Cursor.HAND);
 
         GraphicsContext gcHome = homeCanvas.getGraphicsContext2D();
         GraphicsContext gcLeague = leagueCanvas.getGraphicsContext2D();
 
-        GraphicsUtilities.drawHouse(gcHome, main.getCurrentTheme().getTextColor(), main.getCurrentTheme().getTextColor());
-        GraphicsUtilities.drawLeague(gcLeague, main.getCurrentTheme().getTextColor(), main.getCurrentTheme().getTextColor());
+        GraphicsUtilities.drawHouse(gcHome, main.getCurrentTheme().getThemeBaseColorMap().get(Theme.ThemeBase.TEXT_COLOR), main.getCurrentTheme().getThemeBaseColorMap().get(Theme.ThemeBase.TEXT_COLOR));
+        GraphicsUtilities.drawLeague(gcLeague, main.getCurrentTheme().getThemeBaseColorMap().get(Theme.ThemeBase.TEXT_COLOR), main.getCurrentTheme().getThemeBaseColorMap().get(Theme.ThemeBase.TEXT_COLOR));
     }
 
     private void initActive() {
@@ -166,15 +166,15 @@ public class GameInsightController {
             GraphicsContext gc = canvasMap.get(entry.getKey()).getGraphicsContext2D();
             if (entry.getValue().equals(false)) {
                 if (!customOverlay)
-                    entry.getKey().setBackground(new Background(new BackgroundFill(main.getCurrentTheme().getOverlay(Theme.OverlayValues.OVERLAY_4), CornerRadii.EMPTY, Insets.EMPTY)));
+                    entry.getKey().setBackground(new Background(new BackgroundFill(main.getCurrentTheme().getEmphasis(6), CornerRadii.EMPTY, Insets.EMPTY)));
                 drawLine = false;
             } else {
                 if (!customOverlay)
-                    entry.getKey().setBackground(new Background(new BackgroundFill(main.getCurrentTheme().getOverlay(Theme.OverlayValues.OVERLAY_8), CornerRadii.EMPTY, Insets.EMPTY)));
+                    entry.getKey().setBackground(new Background(new BackgroundFill(main.getCurrentTheme().getEmphasis(10), CornerRadii.EMPTY, Insets.EMPTY)));
                 drawLine = true;
             }
             if (drawLine) {
-                Stop[] stops = new Stop[]{new Stop(0, main.getCurrentTheme().getMainAccentColor()), new Stop(1, main.getCurrentTheme().getSubAccentColor())};
+                Stop[] stops = new Stop[]{new Stop(0, main.getCurrentTheme().getThemeBaseColorMap().get(Theme.ThemeBase.PRIMARY_ACCENT_COLOR)), new Stop(1, main.getCurrentTheme().getThemeBaseColorMap().get(Theme.ThemeBase.SECONDARY_ACCENT_COLOR))};
                 LinearGradient fill = new LinearGradient(0, 0, 1, 1, true, CycleMethod.NO_CYCLE, stops);
 
                 gc.setLineWidth(2);
@@ -269,7 +269,7 @@ public class GameInsightController {
     @FXML
     private void onMouseHomeHover() {
         if (!active.get(homePane)) {
-            setBaseColor(main.getCurrentTheme().getOverlay(Theme.OverlayValues.OVERLAY_6));
+            setBaseColor(main.getCurrentTheme().addOverlay(24));
             homePane.setBackground(new Background(new BackgroundFill(baseColor, CornerRadii.EMPTY, Insets.EMPTY)));
             updateBackground(true);
         }
@@ -278,7 +278,7 @@ public class GameInsightController {
     @FXML
     private void onLeagueHover() {
         if (active.get(leaguePane).equals(false)) {
-            setBaseColor(main.getCurrentTheme().getOverlay(Theme.OverlayValues.OVERLAY_6));
+            setBaseColor(main.getCurrentTheme().addOverlay(24));
             leaguePane.setBackground(new Background(new BackgroundFill(baseColor, CornerRadii.EMPTY, Insets.EMPTY)));
             updateBackground(true);
         }
@@ -287,7 +287,7 @@ public class GameInsightController {
     @FXML
     private void onMouseHomeExited() {
         if (!active.get(homePane)) {
-            setBaseColor(main.getCurrentTheme().getOverlay(Theme.OverlayValues.OVERLAY_4));
+            setBaseColor(main.getCurrentTheme().addOverlay(60));
             homePane.setBackground(new Background(new BackgroundFill(baseColor, CornerRadii.EMPTY, Insets.EMPTY)));
             updateBackground(false);
         }
@@ -296,7 +296,7 @@ public class GameInsightController {
     @FXML
     private void onLeagueExited() {
         if (!active.get(leaguePane)) {
-            setBaseColor(main.getCurrentTheme().getOverlay(Theme.OverlayValues.OVERLAY_4));
+            setBaseColor(main.getCurrentTheme().addOverlay(50));
             leaguePane.setBackground(new Background(new BackgroundFill(baseColor, CornerRadii.EMPTY, Insets.EMPTY)));
             updateBackground(false);
         }
@@ -305,7 +305,7 @@ public class GameInsightController {
     @FXML
     private void onHomeClicked() {
         setActive(homePane, true);
-        setBaseColor(main.getCurrentTheme().getOverlay(Theme.OverlayValues.OVERLAY_4));
+        setBaseColor(main.getCurrentTheme().addOverlay(18));
         updateBackground(false);
         mainMenuPane.setVisible(true);
     }
@@ -313,11 +313,12 @@ public class GameInsightController {
     @FXML
     private void onLeagueClicked() {
         setActive(leaguePane, true);
-        setBaseColor(main.getCurrentTheme().getOverlay(Theme.OverlayValues.OVERLAY_4));
+        setBaseColor(main.getCurrentTheme().addOverlay(18));
         updateBackground(false);
         mainMenuPane.setVisible(false);
     }
 
+    //TODO: FIX THIS
     private void setBaseColor(Color baseColor) {
         this.baseColor = baseColor;
     }

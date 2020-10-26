@@ -5,9 +5,9 @@ me\beastlymc\gameinsight\controller\ExpandedProfileController.class
 me\beastlymc\gameinsight\networking\GameNetworking.class
 me\beastlymc\gameinsight\gui\AccountType.class
 me\beastlymc\gameinsight\utilities\GraphicsUtilities.class
-me\beastlymc\gameinsight\gui\Theme$Emphasis.class
 me\beastlymc\gameinsight\controller\ControllerUtilities.class
 me\beastlymc\gameinsight\gui\Theme.class
+me\beastlymc\gameinsight\GameInsight$1.class
 me\beastlymc\gameinsight\file\files\CacheFile.class
 me\beastlymc\gameinsight\networking\HTMLUtilities.class
 me\beastlymc\gameinsight\gui\Theme$1.class
@@ -16,6 +16,5 @@ me\beastlymc\gameinsight\file\ImageFile.class
 me\beastlymc\gameinsight\file\files\ProfileImage.class
 me\beastlymc\gameinsight\controller\GameInsightController.class
 me\beastlymc\gameinsight\GameInsight.class
-me\beastlymc\gameinsight\gui\Theme$OverlayValues.class
 me\beastlymc\gameinsight\utilities\Fonts.class
 me\beastlymc\gameinsight\gui\Theme$ThemeBase.class

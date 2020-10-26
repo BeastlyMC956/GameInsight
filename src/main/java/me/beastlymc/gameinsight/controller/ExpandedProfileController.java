@@ -82,7 +82,7 @@ public class ExpandedProfileController {
 
     private void start() throws IOException {
         AccountType accountType = AccountType.PRO;
-        expandedProfilePane.setBackground(new Background(new BackgroundFill(GameInsight.getInstance().getCurrentTheme().getOverlay(Theme.OverlayValues.OVERLAY_7), CornerRadii.EMPTY, Insets.EMPTY)));
+        expandedProfilePane.setBackground(new Background(new BackgroundFill(GameInsight.getInstance().getCurrentTheme().addOverlay(28), CornerRadii.EMPTY, Insets.EMPTY)));
 
         BufferedImage bufferedImage = FileUtilities.getProfileImage().getImage();
         double scale = 64 / (double) bufferedImage.getHeight();
@@ -101,14 +101,14 @@ public class ExpandedProfileController {
         accountTypePane.setBackground(new Background(new BackgroundFill(accountType.getBackground(), CornerRadii.EMPTY, Insets.EMPTY)));
         accountTypeText.setText(accountType.getName().toUpperCase());
         if (GameInsight.getInstance().getCurrentTheme().isDarkBase())
-            accountTypeText.setFill(main.getCurrentTheme().getTextColor());
+            accountTypeText.setFill(main.getCurrentTheme().getThemeBaseColorMap().get(Theme.ThemeBase.TEXT_COLOR));
         else
-            accountTypeText.setFill(main.getCurrentTheme().getTextColor().invert());
+            accountTypeText.setFill(main.getCurrentTheme().getThemeBaseColorMap().get(Theme.ThemeBase.TEXT_COLOR).invert());
         accountTypeText.setLayoutY(Math.round(accountTypePane.getHeight() / 2 + accountTypeText.getFont().getSize() / 2.5));
         accountTypePane.setPrefWidth(accountType.getSize());
 
         expandedProfileText.setFont(ControllerUtilities.TEXT);
-        expandedProfileText.setFill(GameInsight.getInstance().getCurrentTheme().getTextColor());
+        expandedProfileText.setFill(main.getCurrentTheme().getThemeBaseColorMap().get(Theme.ThemeBase.TEXT_COLOR));
         expandedProfileText.setLayoutX(expandedProfileImage.getLayoutX() * 2 + image.getWidth());
         expandedProfileText.setLayoutY(expandedProfileImage.getLayoutY() + expandedProfileImage.getImage().getHeight() - Math.round(expandedProfileText.getFont().getSize() * 1.5));
 
@@ -121,7 +121,7 @@ public class ExpandedProfileController {
         myAccountPane.setPrefWidth(topCanvas.getWidth());
         myAccountPane.setCursor(Cursor.HAND);
 
-        myAccountText.setFill(main.getCurrentTheme().getTextColor());
+        myAccountText.setFill(main.getCurrentTheme().getThemeBaseColorMap().get(Theme.ThemeBase.TEXT_COLOR));
         myAccountText.setFont(FontUtilities.loadFont(Fonts.SEMI_BOLD, 13));
         myAccountText.setLayoutY(myAccountPane.getHeight() / 2 + Math.floor(myAccountText.getFont().getSize() / 2.5));
         myAccountText.setWrappingWidth(myAccountPane.getWidth() - myAccountText.getLayoutX() * 2);
@@ -134,7 +134,7 @@ public class ExpandedProfileController {
         settingsPane.setPrefWidth(topCanvas.getWidth());
         settingsPane.setCursor(Cursor.HAND);
 
-        settingsText.setFill(main.getCurrentTheme().getTextColor());
+        settingsText.setFill(main.getCurrentTheme().getThemeBaseColorMap().get(Theme.ThemeBase.TEXT_COLOR));
         settingsText.setFont(FontUtilities.loadFont(Fonts.SEMI_BOLD, 13));
         settingsText.setLayoutY(settingsPane.getHeight() / 2 + Math.floor(settingsText.getFont().getSize() / 2.5));
         settingsText.setWrappingWidth(myAccountPane.getWidth() - settingsText.getLayoutX() * 2);
@@ -148,7 +148,7 @@ public class ExpandedProfileController {
         logoutPane.setPrefWidth(bottomCanvas.getWidth());
         logoutPane.setCursor(Cursor.HAND);
 
-        logoutText.setFill(main.getCurrentTheme().getTextColor());
+        logoutText.setFill(main.getCurrentTheme().getThemeBaseColorMap().get(Theme.ThemeBase.TEXT_COLOR));
         logoutText.setFont(FontUtilities.loadFont(Fonts.SEMI_BOLD, 13));
         logoutText.setLayoutY(logoutPane.getHeight() / 2 + Math.floor(logoutText.getFont().getSize() / 2.5));
         logoutText.setWrappingWidth(logoutPane.getWidth() - logoutText.getLayoutX() * 2);
@@ -159,7 +159,7 @@ public class ExpandedProfileController {
     }
 
     private void initCanvas() {
-        Stop[] stops = new Stop[]{new Stop(0, main.getCurrentTheme().getMainAccentColor()), new Stop(1, main.getCurrentTheme().getSubAccentColor())};
+        Stop[] stops = new Stop[]{new Stop(0, main.getCurrentTheme().getThemeBaseColorMap().get(Theme.ThemeBase.PRIMARY_ACCENT_COLOR)), new Stop(1, main.getCurrentTheme().getThemeBaseColorMap().get(Theme.ThemeBase.SECONDARY_ACCENT_COLOR))};
         LinearGradient fill = new LinearGradient(0, 0, 1, 1, true, CycleMethod.NO_CYCLE, stops);
 
         GraphicsContext topContext = topCanvas.getGraphicsContext2D();
@@ -187,22 +187,53 @@ public class ExpandedProfileController {
 
         gc.beginPath();
         gc.moveTo(0, 0);
-        gc.lineTo(0, 30);
-        GraphicsUtilities.setColors(gc, main.getCurrentTheme().getMainAccentColor(), main.getCurrentTheme().getMainAccentColor());
+        gc.lineTo(0, 29);
+        GraphicsUtilities.setColors(gc, main.getCurrentTheme().getThemeBaseColorMap().get(Theme.ThemeBase.PRIMARY_ACCENT_COLOR), main.getCurrentTheme().getThemeBaseColorMap().get(Theme.ThemeBase.PRIMARY_ACCENT_COLOR));
         gc.closePath();
 
         gc.beginPath();
-        gc.moveTo(0, settingsPane.getLayoutY() - expandedProfileCanvas.getLayoutY());
-        gc.lineTo(0, 30 + settingsPane.getLayoutY() - expandedProfileCanvas.getLayoutY());
-        GraphicsUtilities.setColors(gc, main.getCurrentTheme().getMainAccentColor(), main.getCurrentTheme().getMainAccentColor());
+        gc.moveTo(0, settingsPane.getLayoutY() - expandedProfileCanvas.getLayoutY() + 1);
+        gc.lineTo(0, 29 + settingsPane.getLayoutY() - expandedProfileCanvas.getLayoutY());
+        GraphicsUtilities.setColors(gc, main.getCurrentTheme().getThemeBaseColorMap().get(Theme.ThemeBase.PRIMARY_ACCENT_COLOR), main.getCurrentTheme().getThemeBaseColorMap().get(Theme.ThemeBase.PRIMARY_ACCENT_COLOR));
         gc.closePath();
 
         gc.beginPath();
-        gc.moveTo(0, logoutPane.getLayoutY() - expandedProfileCanvas.getLayoutY());
-        gc.lineTo(0, 30 + logoutPane.getLayoutY() - expandedProfileCanvas.getLayoutY());
-        GraphicsUtilities.setColors(gc, main.getCurrentTheme().getMainAccentColor().invert(), main.getCurrentTheme().getMainAccentColor().invert());
+        gc.moveTo(0, logoutPane.getLayoutY() - expandedProfileCanvas.getLayoutY() + 1);
+        gc.lineTo(0, 29 + logoutPane.getLayoutY() - expandedProfileCanvas.getLayoutY());
+        GraphicsUtilities.setColors(gc, main.getCurrentTheme().getThemeBaseColorMap().get(Theme.ThemeBase.PRIMARY_ACCENT_COLOR).invert(), main.getCurrentTheme().getThemeBaseColorMap().get(Theme.ThemeBase.PRIMARY_ACCENT_COLOR).invert());
         gc.closePath();
     }
+
+    @FXML
+    void onAccountExit() {
+        myAccountPane.setBackground(null);
+    }
+
+    @FXML
+    void onAccountHover() {
+        myAccountPane.setBackground(new Background(new BackgroundFill(main.getCurrentTheme().getEmphasis(10), CornerRadii.EMPTY, Insets.EMPTY)));
+    }
+
+    @FXML
+    void onSettingsExit() {
+        settingsPane.setBackground(null);
+    }
+
+    @FXML
+    void onSettingsHover() {
+        settingsPane.setBackground(new Background(new BackgroundFill(main.getCurrentTheme().getEmphasis(10), CornerRadii.EMPTY, Insets.EMPTY)));
+    }
+
+    @FXML
+    void onLogoutExit() {
+        logoutPane.setBackground(null);
+    }
+
+    @FXML
+    void onLogoutHover() {
+        logoutPane.setBackground(new Background(new BackgroundFill(main.getCurrentTheme().getEmphasis(10), CornerRadii.EMPTY, Insets.EMPTY)));
+    }
+
 
     @FXML
     private void onLogoutClick() {

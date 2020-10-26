@@ -8,15 +8,15 @@ Coded with the help of JavaFX
 #### More Panes:
 - [x] Main Application Frame
 - [x] Switching of Tabs
-- [ ] Support (Seperate)
-- [ ] Settings (Seperate)
+- [ ] Support (Separate)
+- [ ] Settings (Separate)
     * General
     * Theme
     * etc
-- [ ] My Account (Seperate)
+- [ ] My Account (Separate)
     * Account Hooks for games
     * Changing Profile Picture
-- [ ] Login (Seperate)
+- [ ] Login (Separate)
 - [x] Fix Profile-Menu
 - [ ] Fix Dropdown-Menu
 
@@ -33,7 +33,7 @@ Coded with the help of JavaFX
 - [ ] Store Cache Data
 
 #### Graphical:
-- [x] Theme Selection
+- [x] Dynamic Theme Selection & Creation
 - [x] Dynamic structure of Application Elements
 - [ ] Improve theme visibility
 - [ ] Settle on a permanent style

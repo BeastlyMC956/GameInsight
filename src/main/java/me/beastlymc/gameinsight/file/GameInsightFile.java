@@ -14,14 +14,27 @@ import java.util.logging.Level;
  * @author BeastlyMC956
  */
 public class GameInsightFile {
-    File commonFile;
-    int element = 0;
+    private final File commonFile;
+    private int check = 0;
+    private final List<Object> blacklist;
 
+    /**
+     * <b>Create a File with custom methods</b>
+     *
+     * @param path Which path the file will exists in
+     * @param name What name & extension the file will be.
+     */
     public GameInsightFile(String path, String name) {
         commonFile = new File(path, name);
+        this.blacklist = new ArrayList<>();
         createFile();
     }
 
+    /**
+     * <b>Get the File</b>
+     *
+     * @return The File
+     */
     public File toFile() {
         return commonFile;
     }
@@ -64,6 +77,14 @@ public class GameInsightFile {
         }
     }
 
+
+    /**
+     * <b>Writing Objects to The File</b>
+     * <p>Converts the element to a String when writing</p>
+     *
+     * @param element What to write to the file
+     * @param unique  if the element is meant to be unique
+     */
     public void writeToFile(Object element, boolean unique) {
         if (unique) {
             if (commonFile.length() > 0)
@@ -72,13 +93,17 @@ public class GameInsightFile {
                 for (String line; (line = in.readLine()) != null; )
                     if (line.equals(element))
                         return;
+                blacklist.add(element);
+                check++;
             } catch (Exception e) {
                 throw new RuntimeException("Error reading file: " + commonFile, e);
             }
-        } else
+        } else {
             recreateFile(false);
+        }
         try (FileWriter out = new FileWriter(commonFile, true)) {
             out.write(String.valueOf(element));
+            System.out.println("wrote: " + element);
             out.write(System.lineSeparator());
             out.flush();
         } catch (Exception e) {
@@ -112,24 +137,53 @@ public class GameInsightFile {
                     allLines.add("");
             allLines.add(line - 1, element);
 
+            int fileLength = 0;
+            List<Integer> position = new ArrayList<>();
+            for (Object words : blacklist) {
+                for (Object lines : allLines) {
+                    if (lines.equals(words))
+                        position.add(fileLength);
+                    fileLength++;
+                }
+
+                if (position.size() > 1) {
+                    position.remove(0);
+
+                    for (int positions : position)
+                        allLines.remove(positions);
+                }
+
+                fileLength = 0;
+                position.clear();
+            }
+
             recreateFile(true);
 
             FileWriter out = new FileWriter(commonFile, true);
+
             for (Object s : allLines) {
                 out.write(String.valueOf(s));
                 out.write(System.lineSeparator());
             }
+            out.flush();
             out.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public boolean findData(Object obj) {
+    /**
+     * <b>Finds Data</b>
+     *
+     * @param element What to find
+     *
+     * @return Whether or not the element exists
+     */
+    public boolean findData(Object element) {
         try (Scanner scanner = new Scanner(commonFile)) {
             while (scanner.hasNextLine()) {
                 String s = scanner.nextLine();
-                if (s.equals(obj))
+                if (s.equals(element))
                     return true;
             }
         } catch (FileNotFoundException e) {
@@ -139,22 +193,37 @@ public class GameInsightFile {
         return false;
     }
 
-    public int findLineFromData(Object obj) {
+    /**
+     * <b>Finds Lines from Data</b>
+     *
+     * @param element What object(s) to find
+     *
+     * @return All lines where the element exists
+     */
+    public List<Integer> findLineFromData(Object element) {
         int lineNumber = 0;
+        List<Integer> lines = new ArrayList<>();
         try (Scanner scanner = new Scanner(commonFile)) {
             while (scanner.hasNextLine()) {
                 lineNumber++;
                 String s = scanner.nextLine();
-                if (s.equals(obj))
-                    return lineNumber;
+                if (s.equals(element))
+                    lines.add(lineNumber);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
-        return lineNumber;
+        return lines;
     }
 
+    /**
+     * <b>Finds Data from Line</b>
+     *
+     * @param lineNumber What line to return
+     *
+     * @return The object on the specified line
+     */
     public Object findDataFromLine(int lineNumber) {
         if (lineNumber <= 0)
             lineNumber = 1;
@@ -171,22 +240,26 @@ public class GameInsightFile {
             e.printStackTrace();
         }
 
-        return "N/A";
+        return null;
     }
     /*------------------------[ End of Constructor ]------------------------*/
 
+    /**
+     * <b>Recreate the File</b>
+     *
+     * @param skipCheck If you wish to force the recreation of the file
+     */
     private void recreateFile(boolean skipCheck) {
-        if (skipCheck)
+        if (skipCheck) {
             if (commonFile.delete()) {
-                System.out.println("recreated before");
                 createFile();
-                return;
             }
-        if (element == 0)
-            if (commonFile.delete()) {
-                System.out.println("recreated after");
-                createFile();
-                element++;
-            }
+        } else {
+            if (check == 0)
+                if (commonFile.delete()) {
+                    createFile();
+                    check++;
+                }
+        }
     }
 }

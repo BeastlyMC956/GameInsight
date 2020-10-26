@@ -5,12 +5,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import me.beastlymc.gameinsight.controller.ExpandedProfileController;
 import me.beastlymc.gameinsight.controller.GameInsightController;
 import me.beastlymc.gameinsight.gui.Theme;
 
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,9 +25,8 @@ import java.util.logging.Logger;
  */
 public class GameInsight extends Application {
     private final static Logger LOGGER = Logger.getLogger(GameInsight.class.getName());
-    private final Theme fallbackTheme = Theme.DARK;
     private static Stage stage;
-    private static Theme currentTheme;
+    private static Theme currentTheme = Theme.DARK;
 
     /**
      * <b>Main start of the application</b>
@@ -65,7 +66,11 @@ public class GameInsight extends Application {
     public static void main(String[] args) {
         //gameNetworking = new GameNetworking();
 
-        setTheme(Theme.DARK);
+        Theme coolTheme = new Theme(new ArrayList<Color>(){{
+            add(Color.rgb(0,0,0));
+        }}, true);
+
+        setTheme(coolTheme);
 
         getLOGGER().logp(Level.INFO, "GameInsight.java", "#main(String[] args]);", "Successfully initialized all utilities!");
 
@@ -91,10 +96,6 @@ public class GameInsight extends Application {
 
     public Theme getCurrentTheme() {
         return currentTheme;
-    }
-
-    public Theme getFallbackTheme() {
-        return fallbackTheme;
     }
 
     //public static GameNetworking getGameNetworking() {
