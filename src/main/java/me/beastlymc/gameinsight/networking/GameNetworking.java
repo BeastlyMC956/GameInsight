@@ -23,7 +23,7 @@ public class GameNetworking {
 
     public void riotInit() {
         name = "BeastlyMC956";
-        id = "RGAPI-4e4f2fc0-5a80-41e3-b124-acb6e673eeb2";
+        id = "testid";
         HTMLUtilities.getResponseJSON("https://eun1.api.riotgames.com/lol/summoner/v4/summoners/by-name/" + name + "?api_key=" + id, false);
         File cache = FileUtilities.getCache().toFile();
 
